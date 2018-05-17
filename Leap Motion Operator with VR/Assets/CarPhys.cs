@@ -11,7 +11,11 @@ public class CarPhys : MonoBehaviour {
     public TextMeshProUGUI stateText;
 
     public float speedLimit = 2.0f;
+    public float straightSpeedLimit = 6.0f;
+    public float turningSpeedLimit = 2.0f;
+
     public float turningSpeed = 2.0f;
+
     public float brakingPower = 1.0f;
 
     public float acceleration = 2.0f;
@@ -72,11 +76,61 @@ public class CarPhys : MonoBehaviour {
 
     // END OF MOVEMENT SET 1
 
+    // MOVEMENT SET 2
+    public void MS2_ForwardLeft() // To be Called by Operator Input!
+    {
+        speedLimit = turningSpeedLimit;
+        moveForward();
+        turnLeft();
+    }
+    public void MS2_Forward() // To be Called by Operator Input!
+    {
+        speedLimit = straightSpeedLimit;
+        moveForward();
+    }
+    public void MS2_ForwardRight() // To be Called by Operator Input!
+    {
+        speedLimit = turningSpeedLimit;
+        moveForward();
+        turnRight();
+    }
+    public void MS2_ReverseLeft() // To be Called by Operator Input!
+    {
+        speedLimit = turningSpeedLimit;
+        moveReverse();
+        turnLeft();
+    }
+    public void MS2_Reverse() // To be Called by Operator Input!
+    {
+        speedLimit = turningSpeedLimit; // or straight?
+        moveReverse();
+    }
+    public void MS2_ReverseRight() // To be Called by Operator Input!
+    {
+        speedLimit = turningSpeedLimit;
+        moveReverse();
+        turnRight();
+    }
+    public void MS2_Brakes()
+    {
+        applyBrakes();
+    }
+
+    // END OF MOVEMENT SET 2
+
+
+
     // VEHICLE MOVEMENT
     private void moveForward()
     {
         //Debug.Log("PHYS: FORWARD");
         CurrentVelocity += acceleration;
+        clampVelocity();
+    }
+    private void moveReverse()
+    {
+        //Debug.Log("PHYS: FORWARD");
+        CurrentVelocity -= acceleration;
         clampVelocity();
     }
     private void clampVelocity()

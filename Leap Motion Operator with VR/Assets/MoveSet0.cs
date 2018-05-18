@@ -42,7 +42,8 @@ public class MoveSet0 : MonoBehaviour {
             else if (z < 0)
                 controls.MS2_Left();*/
         }
-
+        if (Input.GetButton("Restart"))
+            controls.RestartLevel();
     }
 
     private void GetVehicleControls()

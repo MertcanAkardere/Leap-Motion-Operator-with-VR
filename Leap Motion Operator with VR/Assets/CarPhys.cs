@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class CarPhys : MonoBehaviour {
@@ -24,7 +25,8 @@ public class CarPhys : MonoBehaviour {
     public float CurrentVelocity = 0.0f;
     public float CurrentTurning = 0.0f;
 
-    public float friction = 0.1f;
+    public float friction = 0.01f;
+    public float rotfriction = 0.05f;
 
     //private bool turningLeft = false;
     //private bool turningRight = false;
@@ -79,24 +81,24 @@ public class CarPhys : MonoBehaviour {
     // MOVEMENT SET 2
     public void MS2_ForwardLeft() // To be Called by Operator Input!
     {
-        speedLimit = turningSpeedLimit;
+        //speedLimit = turningSpeedLimit;
         moveForward();
         turnLeft();
     }
     public void MS2_Forward() // To be Called by Operator Input!
     {
-        speedLimit = straightSpeedLimit;
+        //speedLimit = straightSpeedLimit;
         moveForward();
     }
     public void MS2_ForwardRight() // To be Called by Operator Input!
     {
-        speedLimit = turningSpeedLimit;
+        //speedLimit = turningSpeedLimit;
         moveForward();
         turnRight();
     }
     public void MS2_ReverseLeft() // To be Called by Operator Input!
     {
-        speedLimit = turningSpeedLimit;
+        //speedLimit = turningSpeedLimit;
         moveReverse();
         turnLeft();
     }
@@ -107,7 +109,7 @@ public class CarPhys : MonoBehaviour {
     }
     public void MS2_ReverseRight() // To be Called by Operator Input!
     {
-        speedLimit = turningSpeedLimit;
+        //speedLimit = turningSpeedLimit;
         moveReverse();
         turnRight();
     }
@@ -150,21 +152,21 @@ public class CarPhys : MonoBehaviour {
         CurrentTurning -= turnAcceleration;
         clampTurning();
     }
-    private void clampTurning() { CurrentTurning = Mathf.Clamp(CurrentTurning, -turningSpeed, +turningSpeed); }
+    private void clampTurning() { CurrentTurning = Mathf.Clamp(CurrentTurning, -turningSpeedLimit, +turningSpeedLimit); }
 
     private void stabilize()
     {
         if (isTurningRight())
         {
             CurrentTurning -= turnAcceleration;
-            Mathf.Clamp(CurrentTurning, 0, turningSpeed); // HARD STABILIZE. Change it to "slow down"
+            Mathf.Clamp(CurrentTurning, 0, turningSpeedLimit); // HARD STABILIZE. Change it to "slow down"
 //            if(CurrentTurning==0)
 //                turningRight = false;
         }
         if (isTurningLeft())
         {
             CurrentTurning += turnAcceleration;
-            Mathf.Clamp(CurrentTurning, -turningSpeed, 0);
+            Mathf.Clamp(CurrentTurning, -turningSpeedLimit, 0);
 //            if (CurrentTurning == 0)
 //                isTurningLeft() = false;
         }
@@ -207,15 +209,15 @@ public class CarPhys : MonoBehaviour {
 
         if (CurrentTurning>0)
         {
-            if (CurrentTurning > friction)
-                CurrentTurning -= friction;
+            if (CurrentTurning > rotfriction)
+                CurrentTurning -= rotfriction;
             else
                 CurrentTurning = 0;
         }
         if (CurrentTurning < 0)
         {
-            if (CurrentTurning < -friction)
-                CurrentTurning += friction;
+            if (CurrentTurning < -rotfriction)
+                CurrentTurning += rotfriction;
             else
                 CurrentTurning = 0;
         }
@@ -259,5 +261,10 @@ public class CarPhys : MonoBehaviour {
             state += " Not Turning";
 
         return state;
+    }
+
+    public void RestartLevel()
+    {
+        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
     }
 }

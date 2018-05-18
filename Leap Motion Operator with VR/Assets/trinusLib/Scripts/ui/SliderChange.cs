@@ -9,7 +9,7 @@ namespace trinus{
 
 		public void valueChange(System.Single v){
 			if (val == null)
-				val = transform.FindChild("ValueText").GetComponent<Text> ();
+				val = transform.Find("ValueText").GetComponent<Text> ();
 			val.text = v.ToString();
 		}
 	}

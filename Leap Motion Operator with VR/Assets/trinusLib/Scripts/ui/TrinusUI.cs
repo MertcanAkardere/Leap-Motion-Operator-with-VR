@@ -62,10 +62,10 @@ namespace trinus{
 
 		// Use this for initialization
 		void Awake () {
-			trinusCursor = transform.FindChild("TrinusCursor").transform;
+			trinusCursor = transform.Find("TrinusCursor").transform;
 			trinusProcessor = GameObject.Find ("TrinusManager").GetComponent<TrinusProcessor> ();
-			trinusMessage = transform.FindChild ("TrinusMessage").GetComponent<Text> ();
-			trinusHint = transform.FindChild ("TrinusHint").GetComponent<Text> ();
+			trinusMessage = transform.Find ("TrinusMessage").GetComponent<Text> ();
+			trinusHint = transform.Find ("TrinusHint").GetComponent<Text> ();
 
 			setMessage ();
 			setHint ();
@@ -167,9 +167,9 @@ namespace trinus{
 		}
 		public void showQuitButton(bool active){
 			if (introPages != null && introPages.Length > 0)
-				introPages [introPages.Length - 1].transform.FindChild ("QuitButton").gameObject.SetActive (active);
+				introPages [introPages.Length - 1].transform.Find ("QuitButton").gameObject.SetActive (active);
 			if (mainSettingsPage != null)
-				mainSettingsPage.transform.FindChild ("QuitButton").gameObject.SetActive (active);
+				mainSettingsPage.transform.Find ("QuitButton").gameObject.SetActive (active);
 		}
 		public static void assignUICamera(Canvas canvas, Camera uiCamera){
 			canvas.renderMode = RenderMode.WorldSpace;
@@ -263,7 +263,7 @@ namespace trinus{
 			if (current == null)
 				return null;
 
-			Transform child = current.transform.FindChild (childName);
+			Transform child = current.transform.Find (childName);
 			if (child == null)
 				return null;
 

@@ -21,7 +21,7 @@ public class SampleNoUI : MonoBehaviour {
 	// Use this for initialization
 	void Awake () {
 		trinusProcessor = GameObject.Find ("TrinusManager").GetComponent<TrinusProcessor> ();
-		trinusMessage = transform.FindChild ("TrinusMessage").GetComponent<Text> ();
+		trinusMessage = transform.Find ("TrinusMessage").GetComponent<Text> ();
 
 		GameObject trinusUI = GameObject.Find ("TrinusUI");
 		if (trinusUI != null)

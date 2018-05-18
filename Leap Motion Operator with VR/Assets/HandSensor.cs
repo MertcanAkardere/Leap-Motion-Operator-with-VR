@@ -12,46 +12,58 @@ public class HandSensor : MonoBehaviour {
 
     public void OnTriggerEnter(Collider other)
     {
-        if (isBrake)
-        {
-            Debug.Log("Brake enter.");
-            return;
-        }
-        // if other is hand
-        //ChangeSensorData(true);
-        if (isLeftHand)
-            Debug.Log("Left hand enter.");
-        else
-            Debug.Log("Right hand enter.");
+        //if (other.gameObject.CompareTag("LeapHands"))
+        //{
+            if (isBrake)
+            {
+                Debug.Log("Brake enter. " + other.name);
+                return;
+            }
+            // if other is hand
+            ChangeSensorData(true);
+            if (isLeftHand)
+                Debug.Log("Left hand enter. " + other.name);
+            else
+                Debug.Log("Right hand enter. " + other.name);
+        //}
+        //else
+          //  Debug.Log("foreign obj: " + other.name);
     }
     public void OnTriggerExit(Collider other)
     {
-        if (isBrake)
-        {
-            Debug.Log("Brake exit.");
-            return;
-        }
-        // if other is hand
-        //ChangeSensorData(false);
-        if (isLeftHand)
-            Debug.Log("Left hand exit.");
-        else
-            Debug.Log("Right hand exit.");
+        //if (other.gameObject.CompareTag("LeapHands"))
+        //{
+            if (isBrake)
+            {
+                Debug.Log("Brake exit.");
+                return;
+            }
+            // if other is hand
+            ChangeSensorData(false);
+            if (isLeftHand)
+                Debug.Log("Left hand exit.");
+            else
+                Debug.Log("Right hand exit.");
+        //}
     }
 
+    
     private void OnTriggerStay(Collider other)
     {
-        if (isBrake)
-        {
-            moveset1.applyBrakes();
-            return;
-        }
-        if (isLeftHand)
-            moveset1.LeftSensor();
-        else
-            moveset1.RightSensor();
+        //if (other.gameObject.CompareTag("LeapHands"))
+        //{
+            if (isBrake)
+            {
+                moveset1.applyBrakes();
+                return;
+            }
+            if (isLeftHand)
+                moveset1.LeftSensor();
+            else
+                moveset1.RightSensor();
+        //}
     }
-
+    
 
     // deprecated
     private void ChangeSensorData(bool enter)

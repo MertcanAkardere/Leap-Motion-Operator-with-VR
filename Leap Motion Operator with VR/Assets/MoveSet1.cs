@@ -15,8 +15,8 @@ public class MoveSet1 : MonoBehaviour {
     public float dzMove = 300; // deadzone for movement
     public float dzStop = 300; // deadzone for stopping
 
-    private float dzLeft;
-    private float dzRight;
+    public float dzLeft;
+    public float dzRight;
 
     public GameObject vehicle;
     CarPhys controls; // for car physics 1
@@ -30,7 +30,7 @@ public class MoveSet1 : MonoBehaviour {
 
     void FixedUpdate ()
     {
-        inputDecay();
+        //inputDecay();
 
 
         if (LeftHand)

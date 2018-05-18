@@ -15,11 +15,11 @@ TagManager:
   - 
   - 
   - 
+  - Sensors
   - 
   - 
-  - 
-  - 
-  - 
+  - Car
+  - Route
   - 
   - 
   - 
@@ -39,6 +39,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: UI
+    uniqueID: 3873390173
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

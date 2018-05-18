@@ -37,13 +37,13 @@ namespace trinus{
 
 		void Awake(){
 			defaultRotation = new Vector3(transform.localEulerAngles.x , transform.localEulerAngles.y, transform.localEulerAngles.z);
-			Transform t = transform.FindChild ("LeftCamera");
+			Transform t = transform.Find ("LeftCamera");
 			if (t != null)
 				leftCamera = (Camera)t.GetComponent<Camera> ();
-			t = transform.FindChild ("RightCamera");
+			t = transform.Find ("RightCamera");
 			if (t != null)
 				rightCamera = (Camera)t.GetComponent<Camera> ();
-			t = transform.FindChild ("SplitCamera");
+			t = transform.Find ("SplitCamera");
 			if (t != null)
 				splitCamera = (Camera)t.GetComponent<Camera> ();
 			
@@ -60,7 +60,7 @@ namespace trinus{
 			}
 
 			uiCameraMain = GameObject.Find ("TrinusUICamera").GetComponent<Camera>();
-			uiCameraSub = uiCameraMain.transform.FindChild ("Camera").GetComponent<Camera> ();
+			uiCameraSub = uiCameraMain.transform.Find ("Camera").GetComponent<Camera> ();
 
 			//int savedMode = PlayerPrefs.GetInt ("cameraMode", (int)defaultMode);
 			//setMode ((CAMERA_MODE)savedMode);
@@ -134,7 +134,7 @@ namespace trinus{
 				leftCamera.gameObject.SetActive(false);
 				rightCamera.gameObject.SetActive(false);
 				splitCamera.gameObject.SetActive(true);
-				UnityEngine.VR.VRSettings.enabled = false;
+				UnityEngine.XR.XRSettings.enabled = false;
 				//UnityEngine.VR.VRSettings.loadedDevice = UnityEngine.VR.VRDeviceType.None;
 
 				uiCameraSub.gameObject.SetActive (false);
@@ -144,8 +144,8 @@ namespace trinus{
 				leftCamera.gameObject.SetActive (false);
 				rightCamera.gameObject.SetActive (false);
 				splitCamera.gameObject.SetActive (true);
-				UnityEngine.VR.VRSettings.loadedDevice = UnityEngine.VR.VRDeviceType.Split;
-				UnityEngine.VR.VRSettings.enabled = true;
+				//UnityEngine.XR.XRSettings.loadedDevice = UnityEngine.XR.XRDeviceType.Split;
+				UnityEngine.XR.XRSettings.enabled = true;
 
 				uiCameraSub.gameObject.SetActive (false);
 				uiCameraMain.rect = new Rect (0, 0, 1, 1);
